@@ -1,37 +1,45 @@
 package de.htw_berlin.mytodolist;
 
+import jakarta.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
 public class FootworkSession {
-    private int workTime;
-    private int restTime;
-    private int round;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    public FootworkSession (int workTime, int restTime, int  round){
-    this.workTime = workTime;
-    this.restTime = restTime;
-    this.round = round;
-}
+    private String name;
 
-    public void setWorkTime(int workTime) {
-        this.workTime = workTime;
+    @ElementCollection
+    @CollectionTable(
+            name = "footwork_session_intervals",
+            joinColumns = @JoinColumn(name = "session_id")
+    )
+    @OrderColumn(name = "interval_order")
+    private List<Interval> intervals = new ArrayList<>();
+
+    public FootworkSession() {}
+
+    public Long getId() {
+        return id;
     }
 
-    public int getWorkTime() {
-        return workTime;
-    }
-    public int getRestTime() {
-        return restTime;
+    public String getName() {
+        return name;
     }
 
-    public void setRestTime(int restTime) {
-        this.restTime = restTime;
-    }
-    public int getRound() {
-        return round;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setRound(int round) {
-        this.round = round;
+    public List<Interval> getIntervals() {
+        return intervals;
     }
 
+    public void setIntervals(List<Interval> intervals) {
+        this.intervals = intervals;
+    }
 }
