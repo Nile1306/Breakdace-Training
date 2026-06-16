@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+@CrossOrigin(origins = "https://breakdancetraining-frontend.onrender.com")
 
 @RestController
 public class Controller {
