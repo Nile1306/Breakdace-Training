@@ -14,32 +14,26 @@ public class FootworkSession {
     private String name;
 
     @ElementCollection
-    @CollectionTable(
-            name = "footwork_session_intervals",
-            joinColumns = @JoinColumn(name = "session_id")
-    )
+    @CollectionTable(name = "footwork_session_intervals", joinColumns = @JoinColumn(name = "session_id"))
     @OrderColumn(name = "interval_order")
     private List<Interval> intervals = new ArrayList<>();
+    private String ownerEmail;
+
+    public String getOwnerEmail() {
+        return ownerEmail;
+    }
+
+    public void setOwnerEmail(String ownerEmail) {
+        this.ownerEmail = ownerEmail;
+    }
 
     public FootworkSession() {}
 
-    public Long getId() {
-        return id;
-    }
+    public Long getId() { return id; }
 
-    public String getName() {
-        return name;
-    }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<Interval> getIntervals() {
-        return intervals;
-    }
-
-    public void setIntervals(List<Interval> intervals) {
-        this.intervals = intervals;
-    }
+    public List<Interval> getIntervals() { return intervals; }
+    public void setIntervals(List<Interval> intervals) { this.intervals = intervals; }
 }
