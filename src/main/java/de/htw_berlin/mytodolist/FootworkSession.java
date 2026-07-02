@@ -17,6 +17,15 @@ public class FootworkSession {
     @CollectionTable(name = "footwork_session_intervals", joinColumns = @JoinColumn(name = "session_id"))
     @OrderColumn(name = "interval_order")
     private List<Interval> intervals = new ArrayList<>();
+    private String ownerEmail;
+
+    public String getOwnerEmail() {
+        return ownerEmail;
+    }
+
+    public void setOwnerEmail(String ownerEmail) {
+        this.ownerEmail = ownerEmail;
+    }
 
     public FootworkSession() {}
 
