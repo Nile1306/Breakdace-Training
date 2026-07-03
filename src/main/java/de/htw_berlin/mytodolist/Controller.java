@@ -10,9 +10,11 @@ import java.util.List;
 public class Controller {
 
     private final FootworkSessionRepository repository;
+    private final SessionHistoryRepository historyRepository;
 
-    public Controller(FootworkSessionRepository repository) {
+    public Controller(FootworkSessionRepository repository, SessionHistoryRepository historyRepository) {
         this.repository = repository;
+        this.historyRepository = historyRepository;
     }
 
     @GetMapping("/sessions")
@@ -42,5 +44,16 @@ public class Controller {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
         repository.deleteById(id);
+    }
+
+    @GetMapping("/api/history")
+    public List<SessionHistory> getHistory(@RequestParam String email) {
+        return historyRepository.findByOwnerEmailOrderByIdDesc(email);
+    }
+
+    @PostMapping("/api/history")
+    @ResponseStatus(HttpStatus.CREATED)
+    public SessionHistory saveHistory(@RequestBody SessionHistory entry) {
+        return historyRepository.save(entry);
     }
 }
