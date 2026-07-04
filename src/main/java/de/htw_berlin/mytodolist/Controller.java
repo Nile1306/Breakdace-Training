@@ -11,10 +11,13 @@ public class Controller {
 
     private final FootworkSessionRepository repository;
     private final SessionHistoryRepository historyRepository;
+    private final TodoRepository todoRepository;
 
-    public Controller(FootworkSessionRepository repository, SessionHistoryRepository historyRepository) {
+    public Controller(FootworkSessionRepository repository,SessionHistoryRepository historyRepository, TodoRepository todoRepository) {
+
         this.repository = repository;
         this.historyRepository = historyRepository;
+        this.todoRepository = todoRepository;
     }
 
     @GetMapping("/sessions")
@@ -56,4 +59,38 @@ public class Controller {
     public SessionHistory saveHistory(@RequestBody SessionHistory entry) {
         return historyRepository.save(entry);
     }
+    @GetMapping("/api/todos")
+    public List<Todo> getTodos(@RequestParam String email) {
+        return todoRepository.findByOwnerEmailOrderByDayAsc(email);
+    }
+    @PostMapping("/api/todos")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Todo createTodo(@RequestBody Todo todo) {
+        return todoRepository.save(todo);
+    }
+    @PutMapping("/api/todos/{id}")
+    public Todo updateTodo(@PathVariable Long id,
+                           @RequestBody Todo updated) {
+
+        Todo todo = todoRepository.findById(id)
+                .orElseThrow(() ->
+                        new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        todo.setName(updated.getName());
+        todo.setDay(updated.getDay());
+        todo.setDone(updated.isDone());
+
+        return todoRepository.save(todo);
+    }
+    @DeleteMapping("/api/todos/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteTodo(@PathVariable Long id) {
+
+        if (!todoRepository.existsById(id)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+
+        todoRepository.deleteById(id);
+    }
+
 }
