@@ -10,8 +10,9 @@ public class SessionHistory {
     private Long id;
 
     private String ownerEmail;
+    private String type;
     private String sessionName;
-    private int intervalCount;
+    private Integer intervalCount;
     private String date;
     private String time;
     private boolean completed;
@@ -22,12 +23,15 @@ public class SessionHistory {
 
     public String getOwnerEmail() { return ownerEmail; }
     public void setOwnerEmail(String ownerEmail) { this.ownerEmail = ownerEmail; }
+    public String getType() {  return type; }
+
+    public void setType(String type) { this.type = type; }
 
     public String getSessionName() { return sessionName; }
     public void setSessionName(String sessionName) { this.sessionName = sessionName; }
 
-    public int getIntervalCount() { return intervalCount; }
-    public void setIntervalCount(int intervalCount) { this.intervalCount = intervalCount; }
+    public Integer getIntervalCount() { return intervalCount; }
+    public void setIntervalCount(Integer intervalCount) { this.intervalCount = intervalCount; }
 
     public String getDate() { return date; }
     public void setDate(String date) { this.date = date; }
