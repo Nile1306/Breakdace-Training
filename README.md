@@ -1,4 +1,4 @@
-[![Tests](https://github.com/Nile1306/Breakdance-Training/actions/workflows/ci.yml/badge.svg)](https://github.com/Nile1306/Breakdance-Training/actions/workflows/ci.yml)
+[![Tests](https://github.com/Nile1306/Breakdance-Training/actions/workflows/ci.yml/badge.svg?branch=quocanh)](https://github.com/Nile1306/Breakdance-Training/actions/workflows/ci.yml)
 # mytodolist-backend
 Breakdance Footwork Training App
 Beschreibung
